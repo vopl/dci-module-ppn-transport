@@ -132,7 +132,7 @@ namespace dci::module::ppn::transport
             }
         };
 
-        _restartTicker.onTick() += [this]
+        _restartTicker.tick() += [this]
         {
             if(_needStart && _failed && !_started)
             {

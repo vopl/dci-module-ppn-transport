@@ -38,7 +38,7 @@ dciTest(${UNAME} mstart
     SRC
         ${TST}
     LINK
-        host
+        host-lib
         bytes
         sbs
         utils
