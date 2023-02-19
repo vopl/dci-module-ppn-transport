@@ -63,7 +63,7 @@ namespace dci::module::ppn::transport
             _instance = std::move(instance);
 
             /////////0/////////1/////////2/////////3/////////4/////////5/////////6/////////7
-            _instance->address().apply() += _sbsOwner * [this](auto f)
+            _instance->address().then() += _sbsOwner * [this](auto f)
             {
                 if(f.resolvedValue())
                 {
@@ -81,7 +81,7 @@ namespace dci::module::ppn::transport
             };
 
             /////////0/////////1/////////2/////////3/////////4/////////5/////////6/////////7
-            _instance->cost().apply() += _sbsOwner * [this](auto f)
+            _instance->cost().then() += _sbsOwner * [this](auto f)
             {
                 if(f.resolvedValue())
                 {
@@ -97,7 +97,7 @@ namespace dci::module::ppn::transport
             };
 
             /////////0/////////1/////////2/////////3/////////4/////////5/////////6/////////7
-            _instance->rtt().apply() += _sbsOwner * [this](auto f)
+            _instance->rtt().then() += _sbsOwner * [this](auto f)
             {
                 if(f.resolvedValue())
                 {
@@ -114,7 +114,7 @@ namespace dci::module::ppn::transport
             };
 
             /////////0/////////1/////////2/////////3/////////4/////////5/////////6/////////7
-            _instance->bandwidth().apply() += _sbsOwner * [this](auto f)
+            _instance->bandwidth().then() += _sbsOwner * [this](auto f)
             {
                 if(f.resolvedValue())
                 {
