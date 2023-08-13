@@ -142,10 +142,10 @@ namespace dci::module::ppn::transport
     /////////0/////////1/////////2/////////3/////////4/////////5/////////6/////////7
     api::connector::Downstream<> Connector::getBestDownstreamFor(const api::Address& address, const Set<api::connector::Downstream<>>& blacklist)
     {
-        auto scheme = utils::net::url::scheme(address.value);
-        utils::net::ip::Scope scope = scheme.starts_with("tcp") ?
-                                         utils::net::ip::scope(utils::net::url::authority(address.value)) :
-                                         utils::net::ip::Scope::null;
+        auto scheme = utils::uri::scheme(address.value);
+        utils::ip::Scope scope = scheme.starts_with("tcp") ?
+                                         utils::ip::scope(utils::uri::hostPort(address.value)) :
+                                         utils::ip::Scope::null;
 
         for(;;)
         {
@@ -171,7 +171,7 @@ namespace dci::module::ppn::transport
                     continue;
                 }
 
-                if(utils::net::url::scheme(endpoint->_address.value) != scheme)
+                if(utils::uri::scheme(endpoint->_address.value) != scheme)
                 {
                     continue;
                 }
@@ -182,11 +182,11 @@ namespace dci::module::ppn::transport
                     bool bad = false;
                     switch(endpoint->_addressIpScope)
                     {
-                    case utils::net::ip::Scope::host4:
-                        bad = utils::net::ip::Scope::host4 != scope;
+                    case utils::ip::Scope::host4:
+                        bad = utils::ip::Scope::host4 != scope;
                         break;
-                    case utils::net::ip::Scope::host6:
-                        bad = utils::net::ip::Scope::host6 != scope;
+                    case utils::ip::Scope::host6:
+                        bad = utils::ip::Scope::host6 != scope;
                         break;
                     default:
                         break;

@@ -17,9 +17,9 @@ namespace dci::module::ppn::transport
         Iface           _instance;
         sbs::Owner      _sbsOwner;
 
-        api::Address            _address;
-        std::string             _addressSchema;
-        utils::net::ip::Scope   _addressIpScope {};
+        api::Address        _address;
+        std::string         _addressSchema;
+        utils::ip::Scope    _addressIpScope {};
 
         real64          _cost       {};
         real64          _rtt        {};
@@ -45,15 +45,15 @@ namespace dci::module::ppn::transport
 
         void updateAddress()
         {
-            _addressSchema = utils::net::url::scheme(_address.value);
+            _addressSchema = utils::uri::scheme(_address.value);
 
             if(_addressSchema.starts_with("tcp"))
             {
-                _addressIpScope = utils::net::ip::scope(utils::net::url::authority(_address.value));
+                _addressIpScope = utils::ip::scope(utils::uri::hostPort(_address.value));
             }
             else
             {
-                _addressIpScope = utils::net::ip::Scope::null;
+                _addressIpScope = utils::ip::Scope::null;
             }
         }
 
